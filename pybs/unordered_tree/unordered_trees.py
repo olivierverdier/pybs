@@ -242,21 +242,15 @@ class UnorderedTree(ClonableMultiset):
         """Check if the :class:`UnorderedTree` is a bushy tree."""
         if self == leaf:
             return True
-        elif list(self.keys()) == [leaf]:
-            return True
         else:
-            return False
+            return list(self.keys()) == [leaf]
 
     def _is_symmetric(self):
         """Used to check if free trees are symmetric."""
         if len(self._ms) == 1:
             for tree in self:
-                if tree._is_symmetric():
-                    return True
-                else:
-                    return False
-        else:
-            return False
+                return tree._is_symmetric()
+        return False
 
     def get_free_tree(self):
         """Return the FreeTree representative of `self`.
